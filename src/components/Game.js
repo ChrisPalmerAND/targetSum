@@ -32,11 +32,20 @@ class Game extends React.Component {
     const sumSelected = this.state.selectedNumbers.reduce((acc, curr) => {
       return acc + this.randomNumbers[curr];
     }, 0);
+    if (sumSelected < this.target) {
+      return 'PLAYING';
+    }
+    if (sumSelected === this.target) {
+      return 'WON';
+    }
+    if (sumSelected > this.target) {
+      return 'LOST';
+    }
     console.log(sumSelected);
   };
 
   render() {
-    this.gameStatus();
+    const gameStatus = this.gameStatus();
     return (
       <View style={styles.container}>
         <Text style={styles.target}>{this.target}</Text>
@@ -51,6 +60,7 @@ class Game extends React.Component {
             />
           ))}
         </View>
+        <Text>{gameStatus}</Text>
       </View>
     );
   }
