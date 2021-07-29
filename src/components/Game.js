@@ -36,6 +36,7 @@ class Game extends React.Component {
   };
 
   render() {
+    this.gameStatus();
     return (
       <View style={styles.container}>
         <Text style={styles.target}>{this.target}</Text>
