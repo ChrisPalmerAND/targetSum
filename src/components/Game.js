@@ -26,7 +26,7 @@ class Game extends React.Component {
     this.setState(prevState => ({
       selectedNumbers: [...prevState.selectedNumbers, numberIndex],
     }));
-    // console.log(this.state.selectedNumbers);
+    console.log(this.state.selectedNumbers);
   };
   gameStatus = () => {
     const sumSelected = this.state.selectedNumbers.reduce((acc, curr) => {
