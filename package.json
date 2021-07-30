@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "i": "^0.3.6",
+    "lodash.shuffle": "^4.2.0",
     "react": "17.0.1",
     "react-native": "0.64.2"
   },
