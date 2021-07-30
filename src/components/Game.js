@@ -4,14 +4,16 @@ import {View, Text, Button, StyleSheet} from 'react-native';
 import RandomNumber from './RandomNumber';
 import shuffle from 'lodash.shuffle';
 class Game extends React.Component {
-  state = {
-    selectedNumbers: [],
-    remainingSeconds: this.props.initialSeconds,
-  };
   gameStatus = 'PLAYING';
   static propTypes = {
     randomNumberCount: PropTypes.number.isRequired,
     initialSeconds: PropTypes.number.isRequired,
+    onPlayAgain: PropTypes.func.isRequired,
+  };
+
+  state = {
+    selectedNumbers: [],
+    remainingSeconds: this.props.initialSeconds,
   };
 
   randomNumbers = Array.from({length: this.props.randomNumberCount}).map(
@@ -102,7 +104,9 @@ class Game extends React.Component {
             />
           ))}
         </View>
-        <Button onPress={() => {}} title="Play Again" />
+        {this.gameStatus !== 'PLAYING' && (
+          <Button onPress={this.props.onPlayAgain} title="Play Again" />
+        )}
         <Text>{this.state.remainingSeconds}</Text>
       </View>
     );
