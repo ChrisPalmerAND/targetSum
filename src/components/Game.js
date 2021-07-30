@@ -6,9 +6,11 @@ import {grey} from 'chalk';
 class Game extends React.Component {
   state = {
     selectedNumbers: [],
+    remainingSeconds: this.props.initialSeconds,
   };
   static propTypes = {
     randomNumberCount: PropTypes.number.isRequired,
+    initialSeconds: PropTypes.number.isRequired,
   };
 
   randomNumbers = Array.from({length: this.props.randomNumberCount}).map(
