@@ -8,6 +8,7 @@ class Game extends React.Component {
     selectedNumbers: [],
     remainingSeconds: this.props.initialSeconds,
   };
+  gameStatus = 'PLAYING';
   static propTypes = {
     randomNumberCount: PropTypes.number.isRequired,
     initialSeconds: PropTypes.number.isRequired,
@@ -49,8 +50,20 @@ class Game extends React.Component {
     }));
     console.log(this.state.selectedNumbers);
   };
-  gameStatus = () => {
-    const sumSelected = this.state.selectedNumbers.reduce((acc, curr) => {
+
+  componentWillUpdate(nextProps, nextState) {
+    if (
+      nextState.selectedNumbers !== this.state.selectedNumbers ||
+      nextState.remainingSeconds === 0
+    ) {
+      this.gameStatus = this.calGameStatus(nextState);
+      if (this.gameStatus !== 'PLAYING') {
+        clearInterval(this.intervalId);
+      }
+    }
+  }
+  calGameStatus = nextState => {
+    const sumSelected = nextState.selectedNumbers.reduce((acc, curr) => {
       return acc + this.randomNumbers[curr];
     }, 0);
     if (this.state.remainingSeconds === 0) {
@@ -69,7 +82,7 @@ class Game extends React.Component {
   };
 
   render() {
-    const gameStatus = this.gameStatus();
+    const gameStatus = this.gameStatus;
     return (
       <View style={styles.container}>
         <Text style={[styles.target, styles[`STATUS_${gameStatus}`]]}>
