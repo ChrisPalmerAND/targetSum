@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, Button, StyleSheet} from 'react-native';
 import RandomNumber from './RandomNumber';
-import shuffle from lodash.shuffle;
+import shuffle from 'lodash.shuffle';
 class Game extends React.Component {
   state = {
     selectedNumbers: [],
@@ -20,7 +20,7 @@ class Game extends React.Component {
   target = this.randomNumbers
     .slice(0, this.props.randomNumberCount - 2)
     .reduce((acc, curr) => acc + curr, 0);
-    shuffledRandomNumbers = shuffle(this.randomNumbers)
+  shuffledRandomNumbers = shuffle(this.randomNumbers);
 
   componentDidMount() {
     this.intervalId = setInterval(() => {
@@ -102,6 +102,7 @@ class Game extends React.Component {
             />
           ))}
         </View>
+        <Button onPress={() => {}} title="Play Again" />
         <Text>{this.state.remainingSeconds}</Text>
       </View>
     );
